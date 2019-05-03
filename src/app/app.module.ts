@@ -5,6 +5,7 @@ import { LoggerModule } from './service/logger/logger.module';
 
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
+import { AuthService } from './auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,6 +15,7 @@ import { ROUTES } from './app.routes';
     RouterModule.forRoot(ROUTES),
     LoggerModule
   ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
