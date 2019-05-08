@@ -5,6 +5,7 @@ import { LoggerModule } from './services/logger/logger.module';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { OrgManagerModule } from 'src/org-manager/org-manager.module';
 // ngrx modules - START
 import {EffectsModule} from '@ngrx/effects';
 import {MetaReducer, Store, StoreModule} from '@ngrx/store';
@@ -38,6 +39,7 @@ import { ROUTES } from './app.routes';
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
+    OrgManagerModule,
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
     }),

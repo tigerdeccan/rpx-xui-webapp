@@ -1,0 +1,14 @@
+<div class="govuk-width-container">
+<notification-banner-component>
+  <span text>41 organisations are pending activation. <a [routerLink]="['/pending']"> Check now.</a></span>  
+</notification-banner-component>
+
+ <h1 class="hmcts-page-heading__title govuk-heading-xl">Organisations</h1>
+      <app-govuk-table
+        *ngIf="!(loading$ | async) else loading"
+        [columnConfig]="columnConfig" [rows]="orgs$ | async" [firstCellIsHeader]="false" [caption]="''"
+      ></app-govuk-table>
+      <ng-template #loading>
+        <div>Loading...</div>
+      </ng-template>
+    </div>
