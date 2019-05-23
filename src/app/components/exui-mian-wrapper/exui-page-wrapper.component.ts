@@ -10,17 +10,8 @@ import {Component, Input} from '@angular/core';
  */
 @Component({
   selector: 'exui-page-wrapper',
-  template: `
-    <a *ngIf="backLink" [routerLink]="backLink" class="govuk-back-link">Back</a>
-    <main id="content" role="main" class="govuk-main-wrapper">
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-          <h1 *ngIf="title" class="govuk-heading-xl">{{title}}</h1>
-          <ng-content></ng-content>
-        </div>
-      </div>
-    </main>
-  `
+  templateUrl: 'exui-page-wrapper.component.html',
+  styleUrls: ['exui-page-wrapper.component.scss']
 })
 export class ExuiPageWrapperComponent  {
 
