@@ -20,7 +20,7 @@ import {HttpModule} from '@angular/http';
 // from containers
 import * as fromContainers from './containers';
 // from components
-import * as fromComponents from './components';
+// import * as fromComponents from './components';
 import {ProvidersModule} from '../app/providers/providers.module';
 
 @NgModule({
@@ -36,7 +36,7 @@ import {ProvidersModule} from '../app/providers/providers.module';
     HttpModule,
     ProvidersModule
   ],
-  declarations: [...fromContainers.containers, ...fromComponents.components],
+  declarations: [...fromContainers.containers],
   providers: [
     PlaceholderService,
     CasesService,
