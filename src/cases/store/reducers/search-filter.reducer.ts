@@ -23,10 +23,10 @@ export function reducer( state = initialStateSearch, action: fromCases.CaseSearc
     case fromCases.APPLIED: {
       const {metadataFields, jurisdiction, caseType} = action.payload;
       return {
-          ...state,
           metadataFields,
           jurisdiction,
           caseType,
+          loading: false,
           loaded: true
       };
     }
