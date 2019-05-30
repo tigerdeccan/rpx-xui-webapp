@@ -31,7 +31,8 @@ export const ROUTES: Routes = [
     },
     {
       path: 'case-details',
-      component: CaseDetailsComponent
+      component: CaseDetailsComponent,
+      children: editorRouting
     }
 
 ];
