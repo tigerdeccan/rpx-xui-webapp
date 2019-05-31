@@ -1,38 +1,57 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import * as fromApp from '../store';
+import * as fromApp from '../../store';
 import {Store, select} from '@ngrx/store';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {ConfigurationModel} from '../models/configuration.model';
+import {ConfigurationModel} from '../../models/configuration.model';
 import {catchError, take} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 /**
- *  Configuration Services responsible for fetching initial cofig data needed for app  to run
- *  It also provides instance of environment or other data;
+ *  Configuration Services responsible for fetching initial config data needed for app to run
+ *  It also provides instance of environment or other data
  */
 @Injectable()
 export class AppConfigService {
 
   constructor(private http: HttpClient,  private store: Store<fromApp.State>) {}
-  private configuration: ConfigurationModel;
-
+  private configuration: ConfigurationModel | any;
+  /**
+   * Loading configuration json file
+   */
   load(): Observable<any> {
     const jsonFile = `assets/config/config.json`;
     return this.http.get(jsonFile).pipe(
       catchError(this.handleError)
     );
   }
-
+  /**
+   * Getting configuration from the store
+   * and setting it to private var
+   */
   setConfiguration() {
     this.store.pipe(select(fromApp.getAppFeatures), take(1)).subscribe(config => {
       this.configuration = config;
     });
   }
-
+  /**
+   * Returning features config
+   */
   getFeatureToggle() {
     return this.configuration.features;
+  }
+  /**
+   * Returning caseEditorConfig config
+   */
+  getEditorConfiguration() {
+    return this.configuration.caseEditorConfig;
+  }
+  /**
+   * Returning urls config
+   */
+  getRoutesConfig() {
+    return this.configuration.urls;
   }
 
   // todo make it global and make it make sense

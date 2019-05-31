@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppConfig } from './case.config';
+import { AppConfig } from '../app/services/ccd-config/ccd-case.config';
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,12 +12,16 @@ import {
 
 import { casesRouting } from './case-feature.routes';
 import {StoreModule} from '@ngrx/store';
-import {reducers} from './store';
+import {EffectsModule} from '@ngrx/effects';
+import {reducers, effects} from './store';
 import {SharedModule} from '../app/shared/shared.module';
 import {HttpModule} from '@angular/http';
 
 // from containers
 import * as fromContainers from './containers';
+// from components
+import * as fromComponents from './components';
+import {ProvidersModule} from '../app/providers/providers.module';
 
 @NgModule({
   imports: [
@@ -26,12 +30,14 @@ import * as fromContainers from './containers';
     SearchResultModule,
     HttpClientModule,
     StoreModule.forFeature('cases', reducers),
+    EffectsModule.forFeature(effects),
     casesRouting,
     SharedModule,
     SearchFiltersModule,
-    HttpModule
+    HttpModule,
+    ProvidersModule
   ],
-  declarations: [...fromContainers.containers],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   providers: [
     PlaceholderService,
     CasesService,
@@ -44,7 +50,6 @@ import * as fromContainers from './containers';
     CaseEditWizardGuard,
     RouterHelperService,
     DocumentManagementService,
-    AppConfig,
     RequestOptionsBuilder,
     {
       provide: AbstractAppConfig,

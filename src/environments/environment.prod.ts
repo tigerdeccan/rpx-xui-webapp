@@ -1,32 +1,14 @@
 export const environment = {
   production: true,
   loggingLevel: 'OFF',
-  CaseEditorConfig: {
-    api_url: '/aggregated',
-    case_data_url: '/data',
-    document_management_url: '/documents',
-    login_url: '/login',
-    oauth2_client_id: 'ccd_gateway',
-    postcode_lookup_url: '/addresses?postcode=${postcode}',
-    remote_document_management_url: '/documents',
-    payments_url: '/payments',
-    activity_batch_collection_delay_ms: 1,
-    activity_next_poll_request_ms: 5000,
-    activity_retry: 5,
-    activity_url: '',
-    activity_max_request_per_batch: 25,
-    print_service_url: '/print',
-    remote_print_service_url: '/remote_print'
-  },
-   idam: {
-     idamApiUrl: 'https://idam-api.aat.platform.hmcts.net',
-     idamClientID: 'juiwebapp',
-     idamLoginUrl: 'https://idam-web-public.aat.platform.hmcts.net',
-     indexUrl: '/',
-     oauthCallbackUrl: 'oauth2/callback'
-   },
    cookies: {
      token: '__auth__',
      userId: '__userid__',
    },
 };
+
+/**
+ * Do not add configuration to this file if possible
+ * Instead add it to config.json file that gets loaded through APP_INITIALIZER;
+ * and consume it through the configuration.service.ts
+ */

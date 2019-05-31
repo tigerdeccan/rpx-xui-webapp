@@ -45,10 +45,11 @@ testem.log
 /reports
 api/.nyc_output
 
+
 # System Files
 .DS_Store
 Thumbs.db
 .sessions
 package-lock.json
+local-only-tools
 
-/local-only-tools
