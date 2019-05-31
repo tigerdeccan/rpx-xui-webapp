@@ -1,27 +1,22 @@
+import { Entity } from './../entity';
 import { Jurisdiction } from '@hmcts/ccd-case-ui-toolkit';
 import * as fromCases from '../actions/case-search.action';
 
 // todo this is just a place holder
 export interface SearchState {
-  metadataFields: Array<any>;
-  jurisdiction: any;
-  caseType: any;
+  metadataFields: Entity;
+  jurisdiction: Entity;
+  caseType: Entity;
   loading: boolean;
   loaded: boolean;
 }
 
-export const initialStateSearch: SearchState = {
-  metadataFields: [],
-  jurisdiction: '',
-  caseType: null,
-  loaded: false,
-  loading: false,
-};
-
-export function reducer( state = initialStateSearch, action: fromCases.CaseSearchAction): SearchState {
+export function reducer( state , action: fromCases.CaseSearchAction): SearchState {
   switch (action.type) {
     case fromCases.APPLIED: {
-      const {metadataFields, jurisdiction, caseType} = action.payload;
+      const metadataFields = new Entity(action.payload.metadataFields);
+      const jurisdiction = new Entity(action.payload.jurisdiction);
+      const caseType = new Entity(action.payload.caseType);
       return {
           metadataFields,
           jurisdiction,
