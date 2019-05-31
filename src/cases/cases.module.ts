@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppConfig } from '../app/services/ccd-config/ccd-case.config';
 import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material';
 
 import {
   CaseUIToolkitModule, DraftService, AlertService, HttpService, AuthService as CCDAuthService, CasesService,
@@ -34,7 +35,8 @@ import {ProvidersModule} from '../app/providers/providers.module';
     SharedModule,
     SearchFiltersModule,
     HttpModule,
-    ProvidersModule
+    ProvidersModule,
+    MatDialogModule
   ],
   declarations: [...fromContainers.containers],
   providers: [

@@ -9,11 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'exui-case-details',
   template: `
     <h1>Case Details Page</h1>
-    <ccd-case-progress [case]="caseId"
-                       [event]="eventTriggerId"
-                       (cancelled)="cancel()"
-                       (submitted)="submit()">
-    </ccd-case-progress>
+    <ccd-case-viewer [hasPrint]="true"
+                     [hasEventSelector]="true"></ccd-case-viewer>
   `
 })
 export class CaseDetailsComponent implements OnInit{
@@ -21,7 +18,7 @@ export class CaseDetailsComponent implements OnInit{
   constructor() {}
 
   caseId = '1559225025259926';
-  eventTriggerId = 'enterCaseIntoLegacy';
+  eventTriggerId = ['enterCaseIntoLegacy'];
 
   ngOnInit(): void {
   }
