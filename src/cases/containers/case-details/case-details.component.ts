@@ -9,8 +9,9 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'exui-case-details',
   template: `
     <h1>Case Details Page</h1>
-    <ccd-case-viewer [hasPrint]="true"
-                     [hasEventSelector]="true"></ccd-case-viewer>
+    <ccd-case-view [hasPrint]="true"
+                     [case]="caseId"
+                     [hasEventSelector]="true"></ccd-case-view>
   `
 })
 export class CaseDetailsComponent implements OnInit{
