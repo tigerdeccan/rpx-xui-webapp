@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './containers/app/app.component';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 // ngrx modules - START
 import {EffectsModule} from '@ngrx/effects';
 import {MetaReducer, Store, StoreModule} from '@ngrx/store';
@@ -32,12 +34,16 @@ import {SharedModule} from './shared/shared.module';
 import { ConsoleLoggerService } from './services/logger/console-logger.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import {SpinnerService} from './services/spinner/spinner.service';
+import {SpinnerInterceptor} from './interceptors/spinner.interceptor';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SpinnerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     CookieModule.forRoot(),
     HttpClientModule,
     ProvidersModule.forRoot(),
@@ -55,6 +61,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     })
   ],
   providers: [
+    SpinnerService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer

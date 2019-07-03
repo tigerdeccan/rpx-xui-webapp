@@ -12,6 +12,7 @@ $govuk-frontend-toolkit-image-path: "/assets";
 $govuk-template-image-path: "/assets";
 
 @import "govuk-elements";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 // Organise SASS (TODO / TS)
 @import "./buttons";
