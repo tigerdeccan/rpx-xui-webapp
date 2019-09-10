@@ -29,7 +29,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/govuk_template_mustache/assets/stylesheets/govuk-template.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true
