@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 export class CaseHomeComponent {
   currentURL = 'currentURL';
   constructor(private router: Router) {
-    const urlTobeReloaded = localStorage.getItem(this.currentURL);
-    console.log(urlTobeReloaded);
-    if (urlTobeReloaded && urlTobeReloaded !== this.router.url) {
-      this.router.navigate([urlTobeReloaded]);
-      localStorage.removeItem(this.currentURL );
-    }
+    // const urlTobeReloaded = localStorage.getItem(this.currentURL);
+    // console.log(urlTobeReloaded);
+    // if (urlTobeReloaded && urlTobeReloaded !== this.router.url) {
+    //   this.router.navigate([urlTobeReloaded]);
+    //   localStorage.removeItem(this.currentURL );
+    // }
   }
 }
