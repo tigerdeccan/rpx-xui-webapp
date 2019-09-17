@@ -21,22 +21,9 @@ export class AppComponent implements OnInit {
   currentURL = 'currentURL';
   componentName = 'App Component';
 
-  @HostListener('window:beforeunload')
-  setUrl() {
-    localStorage.setItem(this.currentURL, this.router.url );
-  }
-
   constructor(
     private logger: LoggerService,
-    private store: Store<fromActions.State> ,
-    private router: Router) {
-      // const urlTobeReloaded = localStorage.getItem(this.currentURL);
-      // console.log(urlTobeReloaded);
-      // if (urlTobeReloaded && urlTobeReloaded !== this.router.url) {
-      //   this.router.navigate([urlTobeReloaded]);
-      //   localStorage.removeItem(this.currentURL );
-      // }
-  }
+    private store: Store<fromActions.State> ) {}
 
   ngOnInit(): void {
     this.appHeaderTitle = AppConstants.APP_HEADER_TITLE;

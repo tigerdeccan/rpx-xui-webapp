@@ -38,7 +38,6 @@ import * as fromContainers from './containers';
 import * as fromComponents from './components';
 // from services
 import * as fromServices from './services';
-import {ProvidersModule} from '../app/providers/providers.module';
 
 @NgModule({
   imports: [

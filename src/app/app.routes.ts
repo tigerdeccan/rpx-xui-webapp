@@ -17,9 +17,5 @@ export const ROUTES: Routes = [
   { path: 'case/:cid', redirectTo: 'cases/case-details/:cid', pathMatch: 'full' },
   { path: 'case-details/:cid', redirectTo: 'cases/case-details/:cid', pathMatch: 'full' },
   { path: 'service-down', component: ServiceDownComponent },
-  {
-    path: '**',
-    redirectTo: '/cases',
-    pathMatch: 'full'
-  }
+
 ];
