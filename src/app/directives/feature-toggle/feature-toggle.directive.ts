@@ -1,3 +1,4 @@
+import { LaunchDarklyService } from './../../shared/services/launch-darkly.service';
 import { Directive, Input, TemplateRef, ViewContainerRef, OnInit } from '@angular/core';
 import {ConfigurationModel} from '../../models/configuration.model';
 import {AppConfigService} from '../../services/config/configuration.services';
@@ -12,11 +13,11 @@ export class FeatureToggleDirective implements OnInit {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private appConfigService: AppConfigService
+    private launchDarklyService: LaunchDarklyService,
   ) {}
 
   ngOnInit() {
-    this.config = this.appConfigService.getFeatureToggle() || {};
+    // this.config = this.appConfigService.getFeatureToggle() || {};
     if (this.isEnabled()) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
@@ -25,9 +26,9 @@ export class FeatureToggleDirective implements OnInit {
   }
 
   isEnabled() {
-    if (!this.config[this.exuiFeatureToggle]) {
+    if (!this.launchDarklyService.flags[this.exuiFeatureToggle]) {
       return true;
     }
-    return this.config[this.exuiFeatureToggle].isEnabled;
+    return this.launchDarklyService.flags[this.exuiFeatureToggle].isEnabled;
   }
 }
