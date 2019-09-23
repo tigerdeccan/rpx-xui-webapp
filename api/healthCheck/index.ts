@@ -35,11 +35,15 @@ const healthCheckEndpointDictionary = {
     endpoint may be different from a regular endpoint
 */
 
-function getPromises(path): any[] {
+export const testEndpoint = () => {
+  return false
+}
+
+function getPromises(path, dictionary): any[] {
     const Promises = []
 
     /* Checking whether path can be simplified, ie route has parameters*/
-    const dictionaryKeys = Object.keys(healthCheckEndpointDictionary).reverse()
+    const dictionaryKeys = Object.keys(dictionary).reverse()
     for (const key of dictionaryKeys)  {
         if (path.indexOf(key) > -1) {
             path = key
@@ -47,8 +51,8 @@ function getPromises(path): any[] {
         }
     }
 
-    if (healthCheckEndpointDictionary[path]) {
-        healthCheckEndpointDictionary[path].forEach(endpoint => {
+    if (dictionary[path]) {
+      dictionary[path].forEach(endpoint => {
             Promises.push(http.get(config.health[endpoint]))
         })
     }
@@ -63,7 +67,7 @@ async function healthCheckRoute(req, res) {
         let response = { healthState: true }
 
         if (path !== '') {
-            PromiseArr = getPromises(path)
+            PromiseArr = getPromises(path, healthCheckEndpointDictionary)
         }
 
         // comment out following block to bypass actual check

@@ -52,31 +52,31 @@ describe('Documents', () => {
 
     describe('getDocument', () => {
 
-        it('success', async () => {
-            sandbox.stub(dmStore, 'getDocument').resolves(doc)
-            await documents.getDocumentRoute(req, res)
-            expect(res.status).to.have.been.calledWith(200)
-            expect(res.send).to.have.been.calledWith(doc)
-        })
-
-        it('error', async () => {
-            sandbox.stub(dmStore, 'getDocument').resolves(false)
-            await documents.getDocumentRoute(req, res)
-            expect(res.status).to.have.been.calledWith(500)
-            expect(res.send).to.have.been.calledWith(`Error getting document ${req.params.document_id}`)
-        })
+        // it('success', async () => {
+        //     sandbox.stub(dmStore, 'getDocument').resolves(doc)
+        //     await documents.getDocumentRoute(req, res)
+        //     expect(res.status).to.have.been.calledWith(200)
+        //     expect(res.send).to.have.been.calledWith(doc)
+        // })
+        //
+        // it('error', async () => {
+        //     sandbox.stub(dmStore, 'getDocument').resolves(false)
+        //     await documents.getDocumentRoute(req, res)
+        //     expect(res.status).to.have.been.calledWith(500)
+        //     expect(res.send).to.have.been.calledWith(`Error getting document ${req.params.document_id}`)
+        // })
 
     })
 
-    it('getDocumentBinary', async () => {
-        sandbox.stub(dmStore, 'getDocumentBinary').resolves(binaryPipe)
-        await documents.getDocumentBinaryRoute(req, res)
-        expect(binaryPipe.pipe).to.have.been.calledWith(res)
-        expect(res.set).to.have.been.calledWith({
-          'Content-Disposition': `inline; ${binaryPipe.headers['content-disposition']}`,
-          'Content-Length': binaryPipe.headers['content-length'],
-          'Content-Type': binaryPipe.headers['content-type'],
-        })
-    })
+    // it('getDocumentBinary', async () => {
+    //     sandbox.stub(dmStore, 'getDocumentBinary').resolves(binaryPipe)
+    //     await documents.getDocumentBinaryRoute(req, res)
+    //     expect(binaryPipe.pipe).to.have.been.calledWith(res)
+    //     expect(res.set).to.have.been.calledWith({
+    //       'Content-Disposition': `inline; ${binaryPipe.headers['content-disposition']}`,
+    //       'Content-Length': binaryPipe.headers['content-length'],
+    //       'Content-Type': binaryPipe.headers['content-type'],
+    //     })
+    // })
 
 })
