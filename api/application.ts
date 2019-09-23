@@ -96,3 +96,14 @@ app.use('/data', routes)
 app.use('/documents', documentRouter)
 const logger = log4jui.getLogger('Application')
 logger.info(`Started up on ${config.environment || 'local'} using ${config.protocol}`)
+
+app.get('/testRoute', (req, res) => {
+  res.send({ test: 'Test String' })
+})
+
+/**
+ * Exporting App for testing
+ */
+export function getExpressApp() {
+  return app
+}
