@@ -7,7 +7,9 @@
 </exui-header>
 
 <div class="govuk-width-container">
-  <router-outlet></router-outlet>
+  <feature-toggle-provider [features]="featureToggleData">
+    <router-outlet></router-outlet>
+  </feature-toggle-provider>
 </div>
 
 <exui-app-footer></exui-app-footer>

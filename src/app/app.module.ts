@@ -11,6 +11,7 @@ import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-s
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {storeFreeze} from 'ngrx-store-freeze';
 import {LoggerService} from './services/logger/logger.service';
+import {FeatureToggleModule} from 'ngx-feature-toggle';
 // enforces immutability
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -56,7 +57,8 @@ import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler
     LoggerModule.forRoot({
       level: NgxLoggerLevel.TRACE,
       disableConsoleLogging: false
-    })
+    }),
+    FeatureToggleModule
   ],
   providers: [
     {

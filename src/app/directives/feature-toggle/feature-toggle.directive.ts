@@ -1,4 +1,4 @@
-import { LaunchDarklyService } from './../../shared/services/launch-darkly.service';
+import { LaunchDarklyService } from '../../shared/services/launch-darkly.service';
 import { Directive, Input, TemplateRef, ViewContainerRef, OnInit } from '@angular/core';
 import {ConfigurationModel} from '../../models/configuration.model';
 import {AppConfigService} from '../../services/config/configuration.services';
@@ -26,9 +26,9 @@ export class FeatureToggleDirective implements OnInit {
   }
 
   isEnabled() {
-    if (!this.launchDarklyService.flags[this.exuiFeatureToggle]) {
+    if (!this.launchDarklyService.featureToggleData[this.exuiFeatureToggle]) {
       return true;
     }
-    return this.launchDarklyService.flags[this.exuiFeatureToggle].isEnabled;
+    return this.launchDarklyService.featureToggleData[this.exuiFeatureToggle].isEnabled;
   }
 }
