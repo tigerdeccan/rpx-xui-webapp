@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import { HealthCheckGuard } from './guards/health-check.guard';
 import { HealthCheckService } from './services/health-check.service';
+import { LoaderModule } from './loader/loader.module';
 
 /**
  * Shared Module
@@ -15,7 +16,7 @@ import { HealthCheckService } from './services/health-check.service';
  * FormsModule, CommonModule, ReactiveForms etc..
  */
 @NgModule( {
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, LoaderModule],
   declarations: [
     ...fromAppComponents.components,
     ...fromAppContainers.containers,

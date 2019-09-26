@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './containers/app/app.component';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 // ngrx modules - START
 import {EffectsModule} from '@ngrx/effects';
@@ -36,6 +36,8 @@ import { CryptoWrapper } from './services/logger/cryptoWrapper';
 import { JwtDecodeWrapper } from './services/logger/jwtDecodeWrapper';
 import { AbstractAppInsights, AppInsightsWrapper } from './services/logger/appInsightsWrapper';
 import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler';
+import { LoaderModule } from './shared/loader/loader.module';
+import { LoaderInterceptorService } from './shared/loader/services/loader-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,7 +58,8 @@ import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler
     LoggerModule.forRoot({
       level: NgxLoggerLevel.TRACE,
       disableConsoleLogging: false
-    })
+    }),
+    LoaderModule
   ],
   providers: [
     {
