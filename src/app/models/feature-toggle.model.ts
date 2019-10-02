@@ -1,4 +1,4 @@
 export interface FeatureToggleService {
-  connectService(): void;
-  getFeatureToggleData(): {[ key: string]: any};
+  featureToggleData: any;
+  connectService(): Promise<any>;
 }

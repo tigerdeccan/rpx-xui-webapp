@@ -4,7 +4,6 @@ import {Store} from '@ngrx/store';
 import * as fromCaseCreate from '../../store/reducers';
 import {ActionBindingModel} from '../../models/create-case-actions.model';
 import * as fromCasesFeature from '../../store';
-
 /**
  * Entry component wrapper for CCD-CASE-FILTER component
  * Smart Component
@@ -13,21 +12,26 @@ import * as fromCasesFeature from '../../store';
 @Component({
   selector: 'exui-filter-case',
   template: `
-    <exui-page-wrapper [title]="'Create Case'">
-      <div class="width-50">
-        <exui-ccd-connector
-          *exuiFeatureToggle="'ccdCaseCreate'"
-          [eventsBindings]="caseCreatFilterBindings"
-          [store]="store"
-          [fromFeatureStore]="fromCasesFeature">
-          <ccd-create-case-filters
-            #ccdComponent
-            [attr.isDisabled]="false"
-            [startButtonText]="startButtonText"
-          ></ccd-create-case-filters>
-        </exui-ccd-connector>
+    <div>
+        <exui-page-wrapper [title]="'Create Case'" *exuiFeatureToggle="'v1'">
+          <div class="width-50">
+            <exui-ccd-connector
+              [eventsBindings]="caseCreatFilterBindings"
+              [store]="store"
+              [fromFeatureStore]="fromCasesFeature">
+              <ccd-create-case-filters
+                #ccdComponent
+                [attr.isDisabled]="false"
+                [startButtonText]="startButtonText"
+              ></ccd-create-case-filters>
+            </exui-ccd-connector>
+          </div>
+        </exui-page-wrapper>
+        <div *exuiFeatureToggle="'v2'">
+          Hello Smiley
+        </div>
       </div>
-    </exui-page-wrapper>`,
+    `,
   encapsulation: ViewEncapsulation.None
 })
 export class CaseFilterComponent implements OnInit {

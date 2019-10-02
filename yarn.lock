@@ -3431,11 +3431,6 @@ faye-websocket@~0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
-feature-toggle-service@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/feature-toggle-service/-/feature-toggle-service-4.1.1.tgz#8e9c27bf4b9aa3ce925188e433bf516917bd2fbf"
-  integrity sha512-uQGvmtvP8x4N2W5r8ZOKleW4Qp8cAqXTkYwzLUfauaYZFLnKTueBPg3Mn4M7pwpjOA/qYbAvr7XIZyA6nQubWA==
-
 figgy-pudding@^3.4.1, figgy-pudding@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.1.tgz#862470112901c727a0e495a80744bd5baa1d6790"
@@ -6048,14 +6043,6 @@ ngx-cookie@^4.1.2:
   dependencies:
     tslib "^1.9.0"
 
-ngx-feature-toggle@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/ngx-feature-toggle/-/ngx-feature-toggle-7.0.2.tgz#ad00a13962757e14c99b05c31199c14df975d59c"
-  integrity sha512-pucKQ1vKtAdxEjq/+B4/CJBY6BBH7DdOH5S+1yYLnzZlQYasF4TEOOvxPw5f6QrtgODL4s/9QtoZ2bTNI0XWKA==
-  dependencies:
-    feature-toggle-service "^4.1.1"
-    tslib "^1.9.0"
-
 ngx-logger@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/ngx-logger/-/ngx-logger-4.0.4.tgz#2daefe010a193b2d0fc6b3a50b5ed1f7d002d8ae"
@@ -6185,7 +6172,7 @@ node-releases@^1.1.23:
   dependencies:
     semver "^5.3.0"
 
-node-sass@4.12.0:
+node-sass@4.12.0, node-sass@^4.12.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.12.0.tgz#0914f531932380114a30cc5fa4fa63233a25f017"
   integrity sha512-A1Iv4oN+Iel6EPv77/HddXErL2a+gZ4uBeZUy+a8O35CFYTXhgA8MgLCWBtwpGZdCvTvQ9d+bQxX/QC36GDPpQ==

@@ -1,15 +1,12 @@
+  <exui-header
+    [navItems]="navItems"
+    [title]="appHeaderTitle"
+    [userNav]="userNav"
+    (navigate)="onNavigate($event)">
+  </exui-header>
 
-<exui-header
-  [navItems]="navItems"
-  [title]="appHeaderTitle"
-  [userNav]="userNav"
-  (navigate)="onNavigate($event)">
-</exui-header>
+  <div class="govuk-width-container">
+      <router-outlet></router-outlet>
+  </div>
 
-<div class="govuk-width-container">
-  <feature-toggle-provider [features]="featureToggleData">
-    <router-outlet></router-outlet>
-  </feature-toggle-provider>
-</div>
-
-<exui-app-footer></exui-app-footer>
+  <exui-app-footer></exui-app-footer>

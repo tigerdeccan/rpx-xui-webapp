@@ -13,7 +13,6 @@ import { FeatureToggleService } from 'src/app/models/feature-toggle.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: LAUNCH_DARKLY_IMPL ,  useClass: LaunchDarklyService   }]
 })
 export class AppComponent implements OnInit {
   navItems: NavItemsModel[];
@@ -26,8 +25,10 @@ export class AppComponent implements OnInit {
     private store: Store<fromActions.State>,
     @Inject(LAUNCH_DARKLY_IMPL) private featureToggleService: FeatureToggleService
     ) {
-      this.featureToggleData = this.featureToggleService.getFeatureToggleData();
-      console.log(this.featureToggleData);
+      this.featureToggleService.connectService().then( data => {
+        this.featureToggleService.featureToggleData = data;
+        this.featureToggleData = data;
+      });
     }
 
   ngOnInit(): void {

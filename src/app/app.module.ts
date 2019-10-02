@@ -1,3 +1,4 @@
+import { ExuiFeatureToggleDirective } from './directives/feature-toggle/feature-toggle.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './containers/app/app.component';
@@ -11,7 +12,6 @@ import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-s
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {storeFreeze} from 'ngrx-store-freeze';
 import {LoggerService} from './services/logger/logger.service';
-import {FeatureToggleModule} from 'ngx-feature-toggle';
 // enforces immutability
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -37,6 +37,7 @@ import { CryptoWrapper } from './services/logger/cryptoWrapper';
 import { JwtDecodeWrapper } from './services/logger/jwtDecodeWrapper';
 import { AbstractAppInsights, AppInsightsWrapper } from './services/logger/appInsightsWrapper';
 import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler';
+import { LaunchDarklyService, LAUNCH_DARKLY_IMPL } from './shared/services/launch-darkly.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -58,7 +59,6 @@ import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler
       level: NgxLoggerLevel.TRACE,
       disableConsoleLogging: false
     }),
-    FeatureToggleModule
   ],
   providers: [
     {
@@ -82,7 +82,8 @@ import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler
     {
       provide: ErrorHandler,
       useClass: DefaultErrorHandler
-    }
+    },
+    { provide: LAUNCH_DARKLY_IMPL ,  useClass: LaunchDarklyService   }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
