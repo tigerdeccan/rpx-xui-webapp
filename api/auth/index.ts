@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 import { config } from '../config'
 import * as log4jui from '../lib/log4jui'
 import { asyncReturnOrError, exists } from '../lib/util'
@@ -13,6 +13,9 @@ export function doLogout(req, res, status = 302) {
     res.clearCookie(cookieToken)
     res.clearCookie(cookieUserId)
     req.session.user = null
+    delete req.session.auth // delete so it does not get returned to FE
+    delete axios.defaults.headers.common.Authorization
+    delete axios.defaults.headers.common.ServiceAuthorization
     req.session.save(() => {
         res.redirect(status, req.query.redirect || '/')
     })

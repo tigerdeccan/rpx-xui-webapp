@@ -14,6 +14,9 @@ import * as log4jui from './lib/log4jui'
 import * as postCodeLookup from './postCodeLookup'
 import {router as printRouter} from './print/routes'
 import routes from './routes'
+import authInterceptor from './lib/middleware/auth'
+import serviceTokenMiddleware from './lib/middleware/serviceToken'
+import axios from 'axios'
 
 config.environment = process.env.XUI_ENV || 'local'
 
@@ -45,6 +48,9 @@ app.use(errorStack)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+app.use(serviceTokenMiddleware)
+app.use(authInterceptor)
 
 app.use((req, res, next) => {
     // Set cookie for angular to know which config to use
