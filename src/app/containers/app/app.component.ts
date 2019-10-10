@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
   appHeaderTitle: AppTitleModel;
   userNav: UserNavModel;
   componentName = 'App Component';
-  featureToggleData = null;
   constructor(
     private logger: LoggerService,
     private store: Store<fromActions.State>,
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit {
     ) {
       this.featureToggleService.connectService().then( data => {
         this.featureToggleService.featureToggleData = data;
-        this.featureToggleData = data;
       });
     }
 
