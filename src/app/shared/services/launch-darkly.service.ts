@@ -23,7 +23,6 @@ export class LaunchDarklyService implements FeatureToggleService {
         this._featureToggleData[val] = true;
       }
     }
-    console.log(this._featureToggleData);
   }
 
 
