@@ -79,6 +79,15 @@ export class CaseListComponent implements OnInit, OnDestroy {
 
     this.paginationSize = this.appConfig.getPaginationPageSize();
 
+    this.listenToFilterSubscription();
+    this.listenToCaseFilter();
+    this.listenToPaginationMetadata();
+    this.listenToResults();
+
+    this.findCaseListPaginationMetadata(this.getEvent());
+  }
+
+  listenToFilterSubscription = () => {
     this.jurisdiction$ = this.store.pipe(select(fromCasesFeature.caselistFilterJurisdiction));
     this.caseType$ = this.store.pipe(select(fromCasesFeature.caselistFilterCaseType));
     this.caseState$ = this.store.pipe(select(fromCasesFeature.caselistFilterCaseState));
@@ -89,18 +98,17 @@ export class CaseListComponent implements OnInit, OnDestroy {
       this.caseState$,
       this.metadataFields$
     ]).subscribe(result => this.onFilterSubscriptionHandler(result));
+  }
 
+  listenToCaseFilter = () => {
     this.caseFilterToggle$ = this.store.pipe(select(fromCasesFeature.getCaselistFilterToggle));
     this.caseFilterToggleSubscription = this.caseFilterToggle$.subscribe( (result: boolean) => this.onToogleHandler(result));
+  }
 
-    this.listenToPaginationMetadata();
-
+  listenToResults = () => {
     this.resultView$ = this.store.pipe(select(fromCasesFeature.caselistFilterResultView));
     this.resultSubscription = this.resultView$.subscribe(resultView =>
       this.onResultsViewHandler(resultView));
-
-
-    this.findCaseListPaginationMetadata(this.getEvent());
   }
 
   listenToPaginationMetadata = () => {

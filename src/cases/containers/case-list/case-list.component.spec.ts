@@ -9,6 +9,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {CaseFilterToggle, FindCaselistPaginationMetadata} from '../../store/actions/case-list.action';
 import {provideMockStore, MockStore} from '@ngrx/store/testing';
 import {Jurisdiction, PaginationMetadata} from '@hmcts/ccd-case-ui-toolkit';
+import {Observable, of} from 'rxjs';
 
 describe('CaseListComponent', () => {
   let component: CaseListComponent;
@@ -19,7 +20,16 @@ describe('CaseListComponent', () => {
    * Spies
    */
   const mockService = jasmine.createSpy();
+  const mockAppConfig = jasmine.createSpy();
+
   let spyOnDispatchToStore = jasmine.createSpy();
+  let spyOnStorePipe = jasmine.createSpy();
+
+  class MockAppConfig {
+    getPaginationPageSize() {
+      return 42;
+    }
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,7 +42,7 @@ describe('CaseListComponent', () => {
         },
         {
           provide: AppConfig,
-          useClass: mockService
+          useClass: MockAppConfig
         },
         {
           provide: DefinitionsService,
@@ -43,6 +53,7 @@ describe('CaseListComponent', () => {
     });
     store = TestBed.get(Store);
     spyOnDispatchToStore = spyOn(store, 'dispatch').and.callThrough();
+    spyOnStorePipe = spyOn(store, 'pipe').and.callThrough();
 
     fixture = TestBed.createComponent(CaseListComponent);
     component = fixture.componentInstance;
@@ -256,5 +267,17 @@ describe('CaseListComponent', () => {
       expect(component.resultsArr).toEqual([{ case_id: 'DRAFT274146' }]);
     });
   });
+
+  // describe('ngOnInit()', () => {
+  //
+  //   it('should set the initial page number to 1', () => {
+  //
+  //     expect(component.page).toBeUndefined();
+  //
+  //     component.ngOnInit();
+  //
+  //     expect(component.page).toEqual(1);
+  //   });
+  // });
 });
 
