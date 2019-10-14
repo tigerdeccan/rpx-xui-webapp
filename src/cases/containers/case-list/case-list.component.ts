@@ -57,6 +57,8 @@ export class CaseListComponent implements OnInit, OnDestroy {
   page: number;
   paginationSubscription: Subscription;
 
+  shouldBeTestable: boolean;
+
   constructor(
     public store: Store<fromCaseList.State>,
     private appConfig: AppConfig,
