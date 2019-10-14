@@ -63,4 +63,15 @@ describe('CCD Connector Component', () => {
     expect(component.ngOnDestroy).toBeTruthy();
   });
 
+
+  describe('deepClone()', () => {
+
+    it('should return a clone of an object', () => {
+      const object = {
+        a: 'value',
+      };
+
+      expect(component.deepClone(object)).toEqual({a: 'value'});
+    });
+  });
 });
