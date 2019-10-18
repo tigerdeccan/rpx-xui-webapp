@@ -20,7 +20,7 @@ const localConfig = [
   {
     browserName: 'chrome',
     acceptInsecureCerts: true,
-    chromeOptions: { args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-zygote '] },
+    chromeOptions: { args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-zygote '] },
     proxy: {
       proxyType: 'manual',
       httpProxy: 'proxyout.reform.hmcts.net:8080',
@@ -36,9 +36,9 @@ const config = {
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   specs: ['../features/**/*.feature'],
-  baseUrl: process.env.TEST_URL || 'http://localhost:3000/',
+  baseUrl: process.env.TEST_URL || 'https://xui-webapp-aat.service.core-compute-aat.internal/',
   params: {
-    serverUrls: process.env.TEST_URL || 'http://localhost:3000/',
+    serverUrls: process.env.TEST_URL || 'https://xui-webapp-aat.service.core-compute-aat.internal/',
     targetEnv: argv.env || 'local',
     // username: process.env.TEST_EMAIL,
     // password: process.env.TEST_PASSWORD,

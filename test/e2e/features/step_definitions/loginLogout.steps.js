@@ -48,8 +48,10 @@ defineSupportCode(function ({ Given, When, Then }) {
 
 
   When(/^I enter an valid email-address and password to login$/, async function () {
+    browser.wait(EC.presenceOf($('#username')), LONG_DELAY);
     await loginPage.emailAddress.sendKeys(this.config.username);          //replace username and password
-    browser.sleep(MID_DELAY);
+    browser.wait(EC.presenceOf($('#password')), LONG_DELAY);
+    //browser.sleep(MID_DELAY);
     await loginPage.password.sendKeys(this.config.password);
     // browser.sleep(SHORT_DELAY);
     await loginPage.signinBtn.click();
@@ -65,7 +67,8 @@ defineSupportCode(function ({ Given, When, Then }) {
 
 
   Given(/^I should be redirected to the Idam login page$/, async function () {
-    browser.sleep(LONG_DELAY);
+    //browser.sleep(LONG_DELAY);
+    browser.wait(EC.presenceOf($('#authorizeCommand h1')), AMAZING_DELAY);
     await expect(loginPage.signinTitle.getText())
       .to
       .eventually
@@ -84,8 +87,9 @@ defineSupportCode(function ({ Given, When, Then }) {
 
 
   Then(/^I should be redirected to EUI dashboard page$/, async function () {
-    browser.sleep(SHORT_DELAY);
+    //browser.sleep(SHORT_DELAY);
     await waitForElement('govuk-heading-xl');
+    browser.wait(EC.presenceOf($('#content h1')), LONG_DELAY);
     await expect(loginPage.dashboard_header.isDisplayed()).to.eventually.be.true;
     await expect(loginPage.dashboard_header.getText())
       .to
@@ -95,18 +99,22 @@ defineSupportCode(function ({ Given, When, Then }) {
   });
 
   Given(/^I am logged into Expert UI with SSCS judge details$/, async function () {
-    browser.sleep(LONG_DELAY);
+    browser.wait(EC.presenceOf($('#username')), AMAZING_DELAY);
+    //browser.sleep(LONG_DELAY);
     await loginPage.emailAddress.sendKeys(this.config.username);
-    browser.sleep(MID_DELAY);
+    browser.wait(EC.presenceOf($('#password')), AMAZING_DELAY);
+    //browser.sleep(MID_DELAY);
     await loginPage.password.sendKeys(this.config.password);
     await loginPage.clickSignIn();
     browser.sleep(MID_DELAY);
   });
 
   Given(/^I am logged into Expert UI with FR judge details$/, async function () {
-    browser.sleep(MID_DELAY);
+   // browser.sleep(MID_DELAY);
+    browser.wait(EC.presenceOf($('#username')), AMAZING_DELAY);
     await loginPage.emailAddress.sendKeys(this.config.username);
-    browser.sleep(MID_DELAY);
+   // browser.sleep(MID_DELAY);
+    browser.wait(EC.presenceOf($('#password')), LONG_DELAY);
     await loginPage.password.sendKeys(this.config.password);
     await loginPage.clickSignIn();
     browser.sleep(LONG_DELAY);
@@ -122,6 +130,7 @@ defineSupportCode(function ({ Given, When, Then }) {
 
   Then(/^I should be redirected back to Login page after direct link$/, async function () {
     browser.sleep(LONG_DELAY);
+    browser.wait(EC.presenceOf($('#authorizeCommand h1')), AMAZING_DELAY);
     await expect(loginPage.signinTitle.getText())
       .to
       .eventually

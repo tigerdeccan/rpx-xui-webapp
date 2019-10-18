@@ -7,6 +7,7 @@ let DivorcesPage = require('../pageObjects/divorcesPage.js');
 let FrUserPage = require('../pageObjects/frUserPage.js');
 let ApplyForProbatePage = require('../pageObjects/applyForProbatePage.js');
 const headerPage = require('../pageObjects/headerPage');
+const EC = protractor.ExpectedConditions;
 const { AMAZING_DELAY, SHORT_DELAY, MID_DELAY, LONG_DELAY } = require('../../support/constants');
 let TestData = require('../../utils/TestData.js');
 var {When} = require('cucumber');
@@ -43,6 +44,7 @@ defineSupportCode(function ({And, But, Given, Then, When}) {
     //await createCaseStartPage.selectCaseType();
     //await createCaseStartPage.selectEvent();
     await createCaseStartPage.clickStartButton();
+    browser.sleep(AMAZING_DELAY);
   });
 
   Then(/^I should navigate to Case details page$/, async function () {
@@ -90,7 +92,8 @@ defineSupportCode(function ({And, But, Given, Then, When}) {
   });
 
   Then(/^I should navigate to apply for probate page$/, async function () {
-    browser.sleep(LONG_DELAY);
+    browser.wait(EC.presenceOf($('#content h1')), AMAZING_DELAY);
+    //browser.sleep(LONG_DELAY);
     expect(await new ProbatePage().amOnPage()).to.be.true
   });
 

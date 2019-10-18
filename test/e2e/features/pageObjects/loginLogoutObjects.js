@@ -4,14 +4,15 @@ const { SHORT_DELAY, MID_DELAY, LONG_DELAY } = require('../../support/constants'
 
 function loginLogoutObjects() {
 
-  this.emailAddress = element(by.css("[id='username']"));
-  this.password = element(by.css("[id='password']"));
-  this.signinTitle = element(by.xpath("//*[@id=\"authorizeCommand\"]/h1"));
+ this.emailAddress =  element(by.css("#username"));
+  this.password = element(by.css("#password"));
+  //this.signinTitle ='h1';
+  //this.signinTitle = element(by.xpath("//*[@id=\"authorizeCommand\"]/h1"));
+  this.signinTitle = element(by.css("#authorizeCommand h1"));
   this.signinBtn = element(by.css("input.button"));
   this.signOutlink = element(by.xpath("//a[@class='hmcts-header__navigation-link']"));
   this.failure_error_heading = element(by.css("[id='validation-error-summary-heading']"));
   this.dashboard_header= element(by.css("[class='govuk-heading-xl']"));
-
 
   this.givenIAmLoggedIn = async function () {
     await this.enterUrEmail('');

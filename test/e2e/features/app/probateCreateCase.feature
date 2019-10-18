@@ -1,5 +1,5 @@
 
-Feature: create case workflow
+Feature: probate create case workflow
 
   Background:
     When I navigate to Expert UI Url
@@ -8,7 +8,7 @@ Feature: create case workflow
     When I click on create case button
     Then Create case page should be displayed
 
-  @smoke
+    @smoke
   Scenario: create case for Probate user workflow
     When I enter mandatory probate fields jurisdiction,case type,event and click on start button
     Then I should navigate to apply for probate page
