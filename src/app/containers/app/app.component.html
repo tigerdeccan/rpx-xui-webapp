@@ -1,13 +1,18 @@
-
-<exui-header
-  [navItems]="navItems"
-  [title]="appHeaderTitle"
-  [userNav]="userNav"
-  (navigate)="onNavigate($event)">
-</exui-header>
-
-<div class="govuk-width-container">
+<ng-container *ngIf="plainView; else masterView">
   <router-outlet></router-outlet>
-</div>
+</ng-container>
+<ng-template #masterView>
 
-<exui-app-footer></exui-app-footer>
+  <exui-header
+    [navItems]="navItems"
+    [title]="appHeaderTitle"
+    [userNav]="userNav"
+    (navigate)="onNavigate($event)">
+  </exui-header>
+
+  <div class="govuk-width-container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <exui-app-footer></exui-app-footer>
+</ng-template>

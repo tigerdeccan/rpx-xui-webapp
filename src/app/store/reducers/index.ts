@@ -2,6 +2,7 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Params,
+  Data,
 } from '@angular/router';
 import { createFeatureSelector, ActionReducerMap, createSelector } from '@ngrx/store';
 
@@ -13,6 +14,7 @@ export interface RouterStateUrl {
   url: string;
   queryParams: Params;
   params: Params;
+  data: Data;
 }
 
 export interface State {
@@ -36,8 +38,9 @@ export class CustomSerializer
       state = state.firstChild;
     }
     const { params } = state;
+    const data = state.data ? state.data : {};
 
-    return { url, queryParams, params };
+    return { url, queryParams, params, data };
   }
 }
 
@@ -49,7 +52,13 @@ export const getRouterState = createFeatureSelector<
 
 export const getRouterUrl = createSelector(
   getRouterState,
-  state => state.state.url
+  router => router.state.url
+);
+
+
+export const getRouterData = createSelector(
+  getRouterState,
+  router => router ? (router.state ? router.state.data : false) : false
 );
 
 export const getAppConfigState = createFeatureSelector<any>( 'appConfig' );
