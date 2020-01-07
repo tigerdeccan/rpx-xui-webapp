@@ -63,7 +63,6 @@ export class AuthService {
     return jwtDecode(jwt);
   }
 
-
   isAuthenticated(): boolean {
     const jwt = this.cookieService.get(this.COOKIE_KEYS.TOKEN);
     if (!jwt) {
