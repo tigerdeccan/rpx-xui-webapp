@@ -34,11 +34,18 @@ const navItems = [{
     text: 'Case list',
     href: '/cases',
     active: false
-  }, {
+  },
+  {
     text: 'Create case',
     href: '/cases/case-filter',
     active: false
-}];
+  },
+  {
+    text: 'Case access',
+    href: '/case-access/notice-of-acting',
+    active: false
+  },
+];
 
 const userNav = {
   label: 'Account navigation',

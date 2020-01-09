@@ -58,7 +58,7 @@ import { ExuiCommonLibModule } from '@hmcts/rpx-xui-common-lib';
       level: NgxLoggerLevel.TRACE,
       disableConsoleLogging: false
     }),
-    ExuiCommonLibModule.forRoot()
+    ExuiCommonLibModule.forRoot({launchDarklyKey: ''})
   ],
   providers: [
     {

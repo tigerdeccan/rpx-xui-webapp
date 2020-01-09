@@ -1,0 +1,15 @@
+<h1 class="govuk-heading-xl">Case details</h1>
+<form [formGroup]="caseDetailsForm" (ngSubmit)="onSubmit()" >
+  <xuilib-gov-uk-input
+    [config]="{label: 'Your client\'s case reference', hint: 'This is a 16 digit number. For example: 1111-2222-3333-4444', name: 'caseReference', id: 'caseReference', type: 'text', classes: 'hmcts-search__input'}"
+    [group]="caseDetailsForm">
+  </xuilib-gov-uk-input>
+  <xuilib-gov-uk-input
+    [config]="{label: 'Your client\'s email address', hint: 'This is the email address they used to create their case', name: 'emailAddress', id: 'emailAddress', type: 'text', classes: 'hmcts-search__input'}"
+    [group]="caseDetailsForm">
+  </xuilib-gov-uk-input>
+  <button type="submit" class="govuk-button">
+    Continue
+  </button>
+</form>
+

@@ -21,6 +21,11 @@ export const ROUTES: Routes = [
   { path: 'case-details/:cid', redirectTo: 'cases/case-details/:cid', pathMatch: 'full' },
   { path: 'v2/case/:cid', redirectTo: 'cases/case-details/:cid', pathMatch: 'full' },
   {
+    path: 'case-access',
+    canActivate: [AuthGuard],
+    loadChildren: '../notice-of-acting/notice-of-acting.module#NoticeOfActingModule'
+  },
+  {
     path: 'cookies',
     component: CookiePolicyComponent
   },
