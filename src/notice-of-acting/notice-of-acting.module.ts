@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import { noticeOfActingRouting } from './notice-of-acting.routing';
 import * as fromContainers from './containers';
@@ -10,6 +8,8 @@ import * as fromServices from './services';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ExuiCommonLibModule } from '@hmcts/rpx-xui-common-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    ExuiCommonLibModule.forChild()
+    ExuiCommonLibModule.forChild(),
+    StoreModule.forFeature('noticeOfActing', reducers),
   ],
   exports: [...fromContainers.containers, ...fromComponent.components],
   declarations: [...fromContainers.containers, ...fromComponent.components],

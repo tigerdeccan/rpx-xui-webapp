@@ -1,4 +1,6 @@
 import {Component, OnDestroy, OnInit, AfterViewInit} from '@angular/core';
+import * as fromStore from '../../store';
+import * as fromRoot from '../../../app/store/';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
@@ -9,9 +11,8 @@ import {Observable, Subscription} from 'rxjs';
 })
 export class NoticeOfActingComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router) {}
+  public currentPageId$: Observable<string>;
+  constructor(private store: Store<fromStore.NoticeOfActingState>) {}
 
   ngOnInit(): void {
   }

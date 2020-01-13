@@ -4,7 +4,8 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-xl">Notice of Acting</span>
-        <exui-noa-case-details></exui-noa-case-details>
+        <exui-noa-case-details *ngIf="(currentPageId$ | async) === 'case-details'"></exui-noa-case-details>
+        <exui-noa-confirmation-success *ngIf="(currentPageId$ | async) === 'confirmation-success'"></exui-noa-confirmation-success*ngIf="(currentPageId$ | async) === 'case-details'">
       </div>
     </div>
   </main>

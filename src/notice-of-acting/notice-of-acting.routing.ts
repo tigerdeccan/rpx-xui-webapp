@@ -6,7 +6,7 @@ export const ROUTES: Routes = [
   {
     path: 'notice-of-acting',
     component: NoticeOfActingComponent,
-  },
+  }
 ];
 
 export const noticeOfActingRouting: ModuleWithProviders = RouterModule.forChild(ROUTES);
