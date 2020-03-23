@@ -1,6 +1,6 @@
 export default {
     health: {
-        ccdComponentApi: 'https://ccd-api-gateway-web-ithc.service.core-compute-ithc.internal/health',
+        ccdComponentApi: 'https://gateway.ithc.platform.hmcts.net/health',
         ccdDataApi: 'https://ccd-data-store-api-ithc.service.core-compute-ithc.internal/health',
         documentsApi: 'https://dm-store-ithc.service.core-compute-ithc.internal/health',
     },
@@ -8,7 +8,7 @@ export default {
     secureCookie: false,
     services: {
         ccd: {
-            componentApi: 'https://ccd-api-gateway-web-ithc.service.core-compute-ithc.internal',
+            componentApi: 'https://gateway.ithc.platform.hmcts.net',
             dataApi: 'https://ccd-data-store-api-ithc.service.core-compute-ithc.internal',
         },
         documents: {
