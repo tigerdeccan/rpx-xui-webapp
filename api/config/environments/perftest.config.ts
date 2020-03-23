@@ -1,6 +1,6 @@
 export default {
     health: {
-        ccdComponentApi: 'http://ccd-api-gateway-web-perftest.service.core-compute-perftest.internal/health',
+        ccdComponentApi: 'https://gateway-ccd.perftest.platform.hmcts.net/health',
         ccdDataApi: 'http://ccd-data-store-api-perftest.service.core-compute-perftest.internal/health',
         documentsApi: 'http://dm-store-perftest.service.core-compute-perftest.internal/health',
     },
@@ -8,7 +8,7 @@ export default {
     secureCookie: false,
     services: {
         ccd: {
-            componentApi: 'http://ccd-api-gateway-web-perftest.service.core-compute-perftest.internal',
+            componentApi: 'https://gateway-ccd.perftest.platform.hmcts.net',
             dataApi: 'http://ccd-data-store-api-perftest.service.core-compute-perftest.internal',
         },
         documents: {
