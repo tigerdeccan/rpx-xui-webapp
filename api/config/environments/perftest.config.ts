@@ -15,7 +15,7 @@ export default {
             api: 'http://dm-store-perftest.service.core-compute-perftest.internal',
         },
         idam: {
-            idamApiUrl: 'https://idam-api.perftest.platform.hmcts.net',
+            idamApiUrl: 'http://idam-api-perftest.service.core-compute-perftest.internal',
             idamClientID: 'xuiwebapp',
             idamLoginUrl: 'https://idam-web-public.perftest.platform.hmcts.net',
             indexUrl: '/',
