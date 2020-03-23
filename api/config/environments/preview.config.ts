@@ -1,6 +1,6 @@
 export default {
     health: {
-        ccdComponentApi: 'https://ccd-api-gateway-web-aat.service.core-compute-aat.internal/health',
+        ccdComponentApi: 'https://gateway.aat.platform.hmcts.net/health',
         ccdDataApi: 'https://ccd-data-store-api-aat.service.core-compute-aat.internal/health',
         documentsApi: 'https://dm-store-aat.service.core-compute-aat.internal/health',
     },
@@ -8,7 +8,7 @@ export default {
     secureCookie: false,
     services: {
         ccd: {
-            componentApi: 'https://ccd-api-gateway-web-aat.service.core-compute-aat.internal',
+            componentApi: 'https://gateway.aat.platform.hmcts.net',
             dataApi: 'https://ccd-data-store-api-aat.service.core-compute-aat.internal',
         },
         documents: {
