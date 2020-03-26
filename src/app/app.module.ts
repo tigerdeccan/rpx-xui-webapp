@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './containers/app/app.component';
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 // ngrx modules - START
 import {EffectsModule} from '@ngrx/effects';
@@ -38,6 +38,7 @@ import { AbstractAppInsights, AppInsightsWrapper } from './services/logger/appIn
 import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler';
 import { AcceptTermsService } from './services/acceptTerms/acceptTerms.service';
 import { ExuiCommonLibModule } from '@hmcts/rpx-xui-common-lib';
+import { CacheInterceptorService } from './services/cache-interceptor/cache-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -84,7 +85,12 @@ import { ExuiCommonLibModule } from '@hmcts/rpx-xui-common-lib';
       provide: ErrorHandler,
       useClass: DefaultErrorHandler
     },
-    AcceptTermsService
+    AcceptTermsService,
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

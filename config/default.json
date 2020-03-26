@@ -100,9 +100,6 @@
     "referrerPolicy": {
       "policy": "origin"
     },
-    "noCache": {
-      "enable": true
-    },
     "frameguard": {
       "action": "deny"
     },
