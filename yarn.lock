@@ -352,10 +352,8 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@hmcts/ccd-case-ui-toolkit@2.63.3-RDM-7120-prerelease":
-  version "2.63.3-RDM-7120-prerelease"
-  resolved "https://registry.yarnpkg.com/@hmcts/ccd-case-ui-toolkit/-/ccd-case-ui-toolkit-2.63.3-RDM-7120-prerelease.tgz#f4436963e6236586b275fad41a86724b79106b9a"
-  integrity sha512-cduOHxdnbBmeFUrDmsTp8/fTmgMtkCIvd2Xepx6zcYUX6hdAuF7CoFoVbZf03ArBX0L6dtJmdKsky75to9qLiQ==
+"@hmcts/ccd-case-ui-toolkit@file:../ui/ccd-case-ui-toolkit":
+  version "2.64.0-prerelease"
   dependencies:
     "@angular/cli" "^6.0.8"
     "@angular/compiler-cli" "~7.0.3"
@@ -364,6 +362,7 @@
     json-server "^0.14.0"
     karma-jasmine-html-reporter "^1.2.0"
     mocha "^5.0.5"
+    node "^10.14.2"
     typescript "3.1.1"
     underscore "^1.9.1"
 
@@ -7239,6 +7238,11 @@ nocache@2.1.0:
   resolved "https://registry.yarnpkg.com/nocache/-/nocache-2.1.0.tgz#120c9ffec43b5729b1d5de88cd71aa75a0ba491f"
   integrity sha512-0L9FvHG3nfnnmaEQPjT9xhfN4ISk0A8/2j4M37Np4mcDesJjHgEUfgPhdCyZuFI954tjokaIj/A3NdpFNdEh4Q==
 
+node-bin-setup@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/node-bin-setup/-/node-bin-setup-1.0.6.tgz#4b5c9bb937ece702d7069b36ca78af4684677528"
+  integrity sha512-uPIxXNis1CRbv1DwqAxkgBk5NFV3s7cMN/Gf556jSw6jBvV7ca4F9lRL/8cALcZecRibeqU+5dFYqFFmzv5a0Q==
+
 node-ensure@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/node-ensure/-/node-ensure-0.0.0.tgz#ecae764150de99861ec5c810fd5d096b183932a7"
@@ -7339,6 +7343,13 @@ node-uuid@^1.4.3:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
   integrity sha1-sEDrCSOWivq/jTL7HxfxFn/auQc=
+
+node@^10.14.2:
+  version "10.19.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-10.19.0.tgz#8d664e33bfeb0329bd244e814b4dde225c98163f"
+  integrity sha512-ZsRZvBxhsYZruk80VDxTk5+xizVThdDSzJEoCB3tBXUCz9svdpBUbS+K0dyKS7zeQMopYGENvnyu0QRNE1CwaQ==
+  dependencies:
+    node-bin-setup "^1.0.0"
 
 nodemon@^2.0.2:
   version "2.0.2"
