@@ -267,7 +267,7 @@ describe('CaseListComponent', () => {
           }]
         }]
       }]);
-      
+
       component.setCaseListFilterDefaults();
 
       expect(component.defaults).toBeDefined();
@@ -297,17 +297,6 @@ describe('CaseListComponent', () => {
       spyOn(component.paginationSubscription, 'unsubscribe').and.callThrough();
       spyOn(component.caseFilterToggleSubscription, 'unsubscribe').and.callThrough();
 
-  describe('onDestroy()', () => {
-    it('should unsubscribe', () => {
-      component.filterSubscription = new Observable().subscribe();
-      component.resultSubscription = new Observable().subscribe();
-      component.paginationSubscription = new Observable().subscribe();
-      component.caseFilterToggleSubscription = new Observable().subscribe();
-      spyOn(component.filterSubscription, 'unsubscribe').and.callThrough();
-      spyOn(component.resultSubscription, 'unsubscribe').and.callThrough();
-      spyOn(component.paginationSubscription, 'unsubscribe').and.callThrough();
-      spyOn(component.caseFilterToggleSubscription, 'unsubscribe').and.callThrough();
-
       component.ngOnDestroy();
       expect(component.filterSubscription.unsubscribe).toHaveBeenCalled();
       expect(component.resultSubscription.unsubscribe).toHaveBeenCalled();
@@ -317,4 +306,3 @@ describe('CaseListComponent', () => {
   });
 
 });
-
