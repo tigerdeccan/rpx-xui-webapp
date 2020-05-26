@@ -314,15 +314,24 @@ describe('CaseListComponent', () => {
   describe('setCaseListFilterDefaults()', () => {
 
     it('should set the defaults.', () => {
-      mockDefinitionsService.getJurisdictions.and.returnValue(of([{
+
+      component.jurisdictionsBehaviourSubject$.next([{
         id: 'some id',
+        name: 'some name',
+        description: 'some desc',
         caseTypes: [{
           id: 'some id',
+          events: null,
+          name: 'some name',
+          description: 'some desc',
           states: [{
-            id: 'some id'
+            id: 'some id',
+            name: 'some name',
+            description: 'some desc'
           }]
         }]
-      }]));
+      }]);
+      
       component.setCaseListFilterDefaults();
 
       expect(component.defaults).toBeDefined();
@@ -342,21 +351,23 @@ describe('CaseListComponent', () => {
   });
 
 
-  it('should unsubscribe onDestroy', () => {
-    component.filterSubscription = new Observable().subscribe();
-    component.resultSubscription = new Observable().subscribe();
-    component.paginationSubscription = new Observable().subscribe();
-    component.caseFilterToggleSubscription = new Observable().subscribe();
-    spyOn(component.filterSubscription, 'unsubscribe').and.callThrough();
-    spyOn(component.resultSubscription, 'unsubscribe').and.callThrough();
-    spyOn(component.paginationSubscription, 'unsubscribe').and.callThrough();
-    spyOn(component.caseFilterToggleSubscription, 'unsubscribe').and.callThrough();
+  describe('onDestroy()', () => {
+    it('should unsubscribe', () => {
+      component.filterSubscription = new Observable().subscribe();
+      component.resultSubscription = new Observable().subscribe();
+      component.paginationSubscription = new Observable().subscribe();
+      component.caseFilterToggleSubscription = new Observable().subscribe();
+      spyOn(component.filterSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.resultSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.paginationSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.caseFilterToggleSubscription, 'unsubscribe').and.callThrough();
 
-    component.ngOnDestroy();
-    expect(component.filterSubscription.unsubscribe).toHaveBeenCalled();
-    expect(component.resultSubscription.unsubscribe).toHaveBeenCalled();
-    expect(component.paginationSubscription.unsubscribe).toHaveBeenCalled();
-    expect(component.caseFilterToggleSubscription.unsubscribe).toHaveBeenCalled();
+      component.ngOnDestroy();
+      expect(component.filterSubscription.unsubscribe).toHaveBeenCalled();
+      expect(component.resultSubscription.unsubscribe).toHaveBeenCalled();
+      expect(component.paginationSubscription.unsubscribe).toHaveBeenCalled();
+      expect(component.caseFilterToggleSubscription.unsubscribe).toHaveBeenCalled();
+    });
   });
 
 });
