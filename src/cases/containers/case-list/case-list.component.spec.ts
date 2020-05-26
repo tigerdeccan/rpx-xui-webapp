@@ -144,70 +144,6 @@ describe('CaseListComponent', () => {
     });
   });
 
-  describe('applyChangePage()', () => {
-
-    /**
-     * We initially check that page is undefined, so that we know that calling the
-     * findCaseListPaginationMetadata() function is definitely changing the components page property.
-     */
-    it('should update the components page property on page change.', () => {
-
-      expect(component.page).toBeUndefined();
-
-      const event = {
-        selected: {
-          page: 1,
-        }
-      };
-
-      component.applyChangePage(event);
-
-      expect(component.page).toEqual(event.selected.page);
-    });
-
-    /**
-     * Note that the findCaseListPaginationMetadata() dispatches an Action to get the
-     * pagination metadata.
-     */
-    it('should call findCaseListPaginationMetadata() on page change.', () => {
-
-      const spyOnFindCaseListPaginationMetadata = spyOn(component, 'findCaseListPaginationMetadata').and.callThrough();
-
-      const event = {
-        selected: {
-          page: 1,
-        }
-      };
-
-      component.applyChangePage(event);
-
-      expect(spyOnFindCaseListPaginationMetadata).toHaveBeenCalled();
-    });
-
-    it('should call findCaseListPaginationMetadata() on page change with values from localStorage.', () => {
-
-      const spyOnFindCaseListPaginationMetadata = spyOn(component, 'findCaseListPaginationMetadata').and.callThrough();
-
-      const event = {
-        selected: {
-          page: 1,
-        }
-      };
-
-      const localStorageGetItemSpy = spyOn(localStorage, 'getItem');
-      component.savedQueryParams = { id: '' };
-      localStorageGetItemSpy.and.returnValue('{' +
-        '"jurisdiction": "Probate", ' +
-        '"case-type": "GrantOfRepresentation", ' +
-        '"case-state": "BOReadyToIssue"' +
-        '}');
-
-      component.applyChangePage(event);
-
-      expect(spyOnFindCaseListPaginationMetadata).toHaveBeenCalled();
-    });
-  });
-
   describe('applyFilter()', () => {
 
     let event;
@@ -350,6 +286,16 @@ describe('CaseListComponent', () => {
     });
   });
 
+  describe('onDestroy()', () => {
+    it('should unsubscribe', () => {
+      component.filterSubscription = new Observable().subscribe();
+      component.resultSubscription = new Observable().subscribe();
+      component.paginationSubscription = new Observable().subscribe();
+      component.caseFilterToggleSubscription = new Observable().subscribe();
+      spyOn(component.filterSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.resultSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.paginationSubscription, 'unsubscribe').and.callThrough();
+      spyOn(component.caseFilterToggleSubscription, 'unsubscribe').and.callThrough();
 
   describe('onDestroy()', () => {
     it('should unsubscribe', () => {
