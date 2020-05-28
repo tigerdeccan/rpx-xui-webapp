@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { GoogleAnalyticsService, ManageSessionServices } from '@hmcts/rpx-xui-common-lib';
-import { environment as config } from '../../../environments/environment';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import * as fromRoot from '../../store';
 import {propsExist} from '../../../../api/lib/objectUtilities';
-import {IdleUserLogOut, Logout, StopIdleSessionTimeout} from '../../store/actions/app.actions';
+import { environment as config } from '../../../environments/environment';
+import * as fromRoot from '../../store';
 
 @Component({
   selector: 'exui-root',
@@ -31,70 +29,60 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
 
-    this.store.pipe(select(fromRoot.getUseIdleSessionTimeout)).subscribe(useIdleTimeout => {
-      if (useIdleTimeout) {
-        this.loadAndListenForUserDetails();
-      }
-    });
+    // this.store.pipe(select(fromRoot.getUseIdleSessionTimeout)).subscribe(useIdleTimeout => {
+    //   if (useIdleTimeout) {
+    //     this.loadAndListenForUserDetails();
+    //   }
+    // });
   }
 
   /**
-   * Load and Listen for User Details changes
-   *
-   * TODO: Note that this is kicking in too soon, and the User has not signed in as yet. But they
-   * are getting redirected to a 'Service is down page'.
-   *
-   * Remember that we need the User Roles to know what session timeout to apply to that user.
-   * Is there some application state we can listen for???
+   * Load and Listen for User Details
    */
-  public loadAndListenForUserDetails() {
-
-    this.store.pipe(select(fromRoot.getUserDetails)).subscribe(userDetails => this.userDetailsHandler(userDetails))
-
-    this.store.dispatch(new fromRoot.LoadUserDetails());
-  }
+  // public loadAndListenForUserDetails() {
+  //
+  //   this.store.pipe(select(fromRoot.getUserDetails)).subscribe(userDetails => this.userDetailsHandler(userDetails))
+  //
+  //   this.store.dispatch(new fromRoot.LoadUserDetails());
+  // }
 
   /**
    * User Details Handler
    *
-   * @param userDetails
+   * If the sessionTimeout exists on the userDetails object we add the Idle Service Listeners, and initialise
+   * the Idle service.
+   *
+   * @param userDetails - {
+   *  "sessionTimeout": {
+   *  "idleModalDisplayTime": 10,
+   *  "pattern": "-solicitor",
+   *  "totalIdleTime": 50
+   *  }
+   * }
    */
-  public userDetailsHandler(userDetails) {
-
-    if (propsExist(userDetails,['sessionTimeout']) && userDetails.sessionTimeout.totalIdleTime > 0) {
-
-      console.log(userDetails.sessionTimeout);
-      const { idleModalDisplayTime, totalIdleTime } = userDetails.sessionTimeout;
-
-      this.addIdleServiceListener();
-      this.initIdleService(idleModalDisplayTime, totalIdleTime);
-    }
-  }
+  // public userDetailsHandler(userDetails) {
+  //
+  //   if (propsExist(userDetails,['sessionTimeout']) && userDetails.sessionTimeout.totalIdleTime > 0) {
+  //
+  //     console.log(userDetails.sessionTimeout);
+  //     const { idleModalDisplayTime, totalIdleTime } = userDetails.sessionTimeout;
+  //
+  //     this.addIdleServiceListener();
+  //     this.initIdleService(idleModalDisplayTime, totalIdleTime);
+  //   }
+  // }
 
   /**
    * Add Idle Service Listener
    *
    * We listen for idle service events, that alert the application to the User being Idle.
    */
-  public addIdleServiceListener() {
-
-    this.idleService.appStateChanges().subscribe(event => {
-      this.idleServiceEventHandler(event);
-    });
-  }
-
-  /**
-   * Add User Profile Listener
-   *
-   * We listen for User Profile details. Once the application has these details we are able to initialise the idle timer,
-   * which displays a Session Timeout Modal to the User if they have been idle for x amount of time.
-   *
-   * The User profile details contain the User's session timeout information.
-   *
-   * The User's Session Timeout information is different per User and per application.
-   *
-   * TODO: Remove console.log(userProfile) after testing
-   */
+  // public addIdleServiceListener() {
+  //
+  //   this.idleService.appStateChanges().subscribe(event => {
+  //     this.idleServiceEventHandler(event);
+  //   });
+  // }
 
   /**
    * Idle Service Event Handler
@@ -105,60 +93,57 @@ export class AppComponent implements OnInit {
    *
    * @param value - { 'isVisible': false, 'countdown': ''}
    */
-  public idleServiceEventHandler(value) {
-
-    const IDLE_EVENT_MODAL = 'modal';
-    const IDLE_EVENT_SIGNOUT = 'signout';
-    const IDLE_EVENT_KEEP_ALIVE = 'keepalive';
-
-    switch (value.type) {
-      case IDLE_EVENT_MODAL: {
-        this.setModal(value.countdown, value.isVisible);
-        return;
-      }
-      case IDLE_EVENT_SIGNOUT: {
-        this.setModal(undefined, false);
-
-        // Ok so we should call an action, that an effect listens to
-        this.store.dispatch(new fromRoot.StopIdleSessionTimeout());
-        this.store.dispatch(new fromRoot.IdleUserLogOut());
-        return;
-      }
-      case IDLE_EVENT_KEEP_ALIVE: {
-        return;
-      }
-      default: {
-        throw new Error('Invalid Dispatch session');
-      }
-    }
-  }
+  // public idleServiceEventHandler(value) {
+  //
+  //   const IDLE_EVENT_MODAL = 'modal';
+  //   const IDLE_EVENT_SIGNOUT = 'signout';
+  //   const IDLE_EVENT_KEEP_ALIVE = 'keepalive';
+  //
+  //   switch (value.type) {
+  //     case IDLE_EVENT_MODAL: {
+  //       this.setModal(value.countdown, value.isVisible);
+  //       return;
+  //     }
+  //     case IDLE_EVENT_SIGNOUT: {
+  //       this.setModal(undefined, false);
+  //
+  //       this.store.dispatch(new fromRoot.StopIdleSessionTimeout());
+  //       this.store.dispatch(new fromRoot.IdleUserLogOut());
+  //       return;
+  //     }
+  //     case IDLE_EVENT_KEEP_ALIVE: {
+  //       return;
+  //     }
+  //     default: {
+  //       throw new Error('Invalid Dispatch session');
+  //     }
+  //   }
+  // }
 
   /**
    * Set Modal
    *
    * Set the modal countdown, and if the modal is visible to the User.
    */
-  public setModal(countdown: number, isVisible: boolean): void {
-    this.modalConfig = {
-        countdown,
-        isVisible
-    };
-  }
+  // public setModal(countdown: number, isVisible: boolean): void {
+  //   this.modalConfig = {
+  //       countdown,
+  //       isVisible
+  //   };
+  // }
 
-  // TODO: Should refresh the token.
   /**
    * Stay Signed in Handler
    */
-  public staySignedInHandler() {
-    this.setModal(undefined, false);
-  }
+  // public staySignedInHandler() {
+  //   this.setModal(undefined, false);
+  // }
+  //
+  // public signOutHandler() {
+  //   this.store.dispatch(new fromRoot.StopIdleSessionTimeout());
+  //   this.store.dispatch(new fromRoot.Logout());
+  // }
 
-  // TODO: Keep consistent naming conventions
-  public signOutHandler() {
-    this.store.dispatch(new fromRoot.StopIdleSessionTimeout());
-    this.store.dispatch(new fromRoot.Logout());
-    console.log('signOutHandler');
-  }
   /**
    * Initialise Idle Service
    *
@@ -189,18 +174,18 @@ export class AppComponent implements OnInit {
    * @param idleModalDisplayTime - Should reach here in minutes
    * @param totalIdleTime - Should reach here in minutes
    */
-  public initIdleService(idleModalDisplayTime, totalIdleTime) {
-
-    const idleModalDisplayTimeInSeconds = idleModalDisplayTime * 60;
-    const totalIdleTimeInMilliseconds = (totalIdleTime * 60) * 1000;
-
-    const idleConfig: any = {
-      timeout: idleModalDisplayTimeInSeconds,
-      idleMilliseconds: totalIdleTimeInMilliseconds,
-      idleServiceName: 'idleSession',
-      keepAliveInSeconds: 5 * 60 * 60,
-    };
-
-    this.idleService.init(idleConfig);
-  }
+  // public initIdleService(idleModalDisplayTime, totalIdleTime) {
+  //
+  //   const idleModalDisplayTimeInSeconds = idleModalDisplayTime * 60;
+  //   const totalIdleTimeInMilliseconds = (totalIdleTime * 60) * 1000;
+  //
+  //   const idleConfig: any = {
+  //     timeout: idleModalDisplayTimeInSeconds,
+  //     idleMilliseconds: totalIdleTimeInMilliseconds,
+  //     idleServiceName: 'idleSession',
+  //     keepAliveInSeconds: 5 * 60 * 60,
+  //   };
+  //
+  //   this.idleService.init(idleConfig);
+  // }
 }
