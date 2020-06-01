@@ -1,15 +1,20 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "paths": { "*": ["customTypings/*"] },
         "outDir": "../dist/rpx-exui/api",
         "target": "es5",
         "types": ["node", "mocha", "rxjs"],
         "baseUrl": ".",
         "lib": ["es2017", "dom"],
         "typeRoots": [
-          "node_modules/@types"
+          "customTypings",
+          "../node_modules/@types"
         ]
     },
     "include": ["**/*.ts", "../*.ts"],
-    "exclude": ["**/*.spec.ts"]
+    "exclude": ["**/*.spec.ts"],
+    "files": [
+      "customTypings/customExpress/index.d.ts"
+    ]
 }
