@@ -7,7 +7,14 @@
         </button>
       </div>
       <div class="hmcts-action-bar__filter" *ngIf="(userDetails | async).canShareCases">
-        <button class="govuk-button hmcts-button--secondary" type="button"  aria-haspopup="true" aria-expanded="false">
+        <button 
+          class="govuk-button hmcts-button--secondary"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          routerLink="case-sharing"
+          [disabled]="!selectionItems?.length"
+        >
           Share Case
         </button>
       </div>
@@ -34,6 +41,7 @@
           <ccd-search-result
             *ngIf="resultView"
             [selectionEnabled]="(userDetails | async).canShareCases"
+            (selection)="addToSelection($event)"
             [jurisdiction]="jurisdiction"
             [caseType]="caseType"
             [caseState]="caseState"

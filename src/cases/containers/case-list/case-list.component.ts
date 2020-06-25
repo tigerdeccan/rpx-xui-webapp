@@ -62,7 +62,7 @@ export class CaseListComponent implements OnInit, OnDestroy {
   public jurisdictions: Jurisdiction[];
 
   public userDetails: Observable<any>;
-  public selectionItems: SearchResultViewItem[];
+  public selectionItems: SearchResultViewItem[] = [];
 
   constructor(
     public store: Store<fromCaseList.State>,
@@ -308,6 +308,10 @@ export class CaseListComponent implements OnInit, OnDestroy {
 
   public toggleFilter() {
     this.store.dispatch(new fromCasesFeature.CaseFilterToggle(!this.showFilter));
+  }
+
+  public addToSelection(event) {
+    this.selectionItems.push(event);
   }
 
   public ngOnDestroy() {
