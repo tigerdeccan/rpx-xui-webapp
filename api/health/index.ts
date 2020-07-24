@@ -1,7 +1,6 @@
 import * as healthcheck from '@hmcts/nodejs-healthcheck'
 import {getConfigValue, showFeature} from '../configuration'
 import {
-  FEATURE_REDIS_ENABLED,
   // FEATURE_TERMS_AND_CONDITIONS_ENABLED,
   SERVICE_S2S_PATH,
   SERVICES_DOCUMENTS_API_PATH,
@@ -39,14 +38,6 @@ export const healthChecks = {
   }
 }*/
 
-if (showFeature(FEATURE_REDIS_ENABLED)) {
-  healthChecks.checks = {...healthChecks.checks, ...{
-      redis: healthcheck.raw(async () => {
-        const status = await redisHealth()
-        return status ? healthcheck.up() : healthcheck.down()
-      }),
-    }}
-}
 
 /**
  * Add Reform standard Health Checks for /health and /health/liveness

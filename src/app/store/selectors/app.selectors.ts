@@ -26,3 +26,10 @@ export const getIsTermsAndConditionsFeatureEnabled = createSelector(
   getConfigState,
   state => state.isTermsAndConditionsFeatureEnabled
 );
+
+export const getUserDetails = createSelector(
+  getConfigState,
+  fromApp.getUserDetails
+);
+
+

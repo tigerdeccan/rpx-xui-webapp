@@ -37,9 +37,14 @@ import { JwtDecodeWrapper } from './services/logger/jwtDecodeWrapper';
 import { AbstractAppInsights, AppInsightsWrapper } from './services/logger/appInsightsWrapper';
 import { DefaultErrorHandler } from './services/errorHandler/defaultErrorHandler';
 import { AcceptTermsService } from './services/acceptTerms/acceptTerms.service';
-import { ExuiCommonLibModule } from '@hmcts/rpx-xui-common-lib';
+import { ExuiCommonLibModule, LAUNCHDARKLYKEY } from '@hmcts/rpx-xui-common-lib';
+import { ENVIRONMENT_CONFIG, EnvironmentConfig } from 'src/models/environmentConfig.model';
+import { CaseShareService } from './services/case/share-case.service';
 import { PaymentLibModule } from '@hmcts/ccpay-web-component';
 
+export function launchDarklyClientIdFactory(envConfig: EnvironmentConfig): string {
+  return envConfig.launchDarklyClientId || '';
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -61,7 +66,7 @@ import { PaymentLibModule } from '@hmcts/ccpay-web-component';
       disableConsoleLogging: false
     }),
     PaymentLibModule,
-    ExuiCommonLibModule.forRoot({launchDarklyKey: ''})
+    ExuiCommonLibModule.forRoot()
   ],
   providers: [
     {
@@ -86,7 +91,9 @@ import { PaymentLibModule } from '@hmcts/ccpay-web-component';
       provide: ErrorHandler,
       useClass: DefaultErrorHandler
     },
-    AcceptTermsService
+    AcceptTermsService,
+    CaseShareService,
+    { provide: LAUNCHDARKLYKEY, useFactory: launchDarklyClientIdFactory, deps: [ENVIRONMENT_CONFIG] },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
